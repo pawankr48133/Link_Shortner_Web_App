@@ -35,4 +35,4 @@ Make sure you have the following installed:
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/your-username/flask-url-shortener.git
+   git clone https://github.com/pawankr48133/Link_Shortner_Web_App.git

@@ -199,4 +199,4 @@ def generate_short_url(length=6):
     return short_url
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=False)

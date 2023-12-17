@@ -11,7 +11,6 @@ The Flask URL Shortener is a lightweight and user-friendly web application built
   - [Installation](#installation)
 - [Usage](#usage)
 - [Contributing](#contributing)
-- [License](#license)
 - [Acknowledgments](#acknowledgments)
 
 ## Features

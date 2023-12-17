@@ -9,7 +9,7 @@ from datetime import datetime, timedelta
 import sqlite3
 import os
 import shortuuid
-
+from urllib.parse import unquote
 
 
 app = Flask(__name__)
@@ -130,7 +130,7 @@ def shorten():
         while short_url in shortened_urls:
             short_url=generate_short_url()
         shortened_urls[short_url]=original_url
-        short_url = f"{request.url_root}{short_url}"
+
 
         expiration_time = datetime.now() + timedelta(days=1)
 
@@ -170,13 +170,29 @@ def analytics():
         return render_template('analytics.html', links=user_links)
     return redirect(url_for('login'))
 
-@app.route("/<short_url>")
-def redirect_url(short_url):
-    long_url=shortened_urls.get(short_url)
-    if long_url:
-        return redirect(long_url)
-    else:
-        return  "URL Not found at ",404
+@app.route("/<path:short_url>")
+def redirect_short(short_url):
+    try:
+
+
+        url_cursor.execute("""
+            SELECT original_url
+            FROM urls
+            WHERE short_url = ? AND expiration_time > datetime('now')
+        """, (short_url,))
+        result = url_cursor.fetchone()
+
+
+
+        if result:
+            original_url = result[0]
+            return redirect(original_url)
+        else:
+            return "URL Not found"
+    except sqlite3.Error as e:
+        print("SQLite error:", e)
+        return "Some Technical Error"
+
 def generate_short_url(length=6):
     chars=string.ascii_letters+string.digits
     short_url="".join(random.choice(chars) for _ in range(length))

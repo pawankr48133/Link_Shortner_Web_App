@@ -83,7 +83,7 @@
                 <tbody>
                     {% for link in links %}
                         <tr>
-                            <td>{{ link[0] }}</td>
+                            <td><a href="{{ link[0] }}" target="_blank">{{ link[0] }}</a></td>
                             <td class="url-column">{{ link[1] }}</td>
                             <td>{{ link[2] }}</td>
                         </tr>

@@ -191,7 +191,7 @@ def redirect_short(short_url):
             return "URL Not found"
     except sqlite3.Error as e:
         print("SQLite error:", e)
-        return "Some Technical Error"
+        return "Some Technical Error Happen"
 
 def generate_short_url(length=6):
     chars=string.ascii_letters+string.digits

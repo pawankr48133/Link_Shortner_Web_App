@@ -188,7 +188,7 @@ def redirect_short(short_url):
             original_url = result[0]
             return redirect(original_url)
         else:
-            return "URL Not found"
+            return "URL Expiration Time is Over"
     except sqlite3.Error as e:
         print("SQLite error:", e)
         return "Some Technical Error Happen"
@@ -199,4 +199,4 @@ def generate_short_url(length=6):
     return short_url
 
 if __name__ == '__main__':
-    app.run(debug=False)
+    app.run(debug=True)
